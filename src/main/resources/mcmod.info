@@ -1,0 +1,19 @@
+[
+{
+  "modid": "AVR",
+  "name": "Auto Vanilla Repairer",
+  "description": "A Minecraft mod that adds a machine to implement vanilla crafting item repair",
+  "version": "1.0",
+  "credits": "Created by sww1235, with much guidance from Pahimar's LetsModReboot series",
+  "logoFile": "",
+  "mcversion": "1.7.10-10.13.2.1286",
+  "url": "",
+  "updateUrl": "",
+  "authors": [ "sww1235" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+	 "mod_MinecraftForge"
+]
+}
+]
