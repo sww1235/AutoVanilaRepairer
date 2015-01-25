@@ -15,12 +15,14 @@ public class ConfigurationHandler
         public static final String CATAGORY_MOREOPNESS = "MoreOPness";
         public static Configuration configuration;
         public static boolean vanillaBonus = false;
+
         public static void init(File configFile)
             {
                 //create configuration object from given config file
                 if(configuration == null)
                     {
                         configuration = new Configuration(configFile);
+                        loadConfiguration();
                     }
             }
         @SubscribeEvent
@@ -32,7 +34,7 @@ public class ConfigurationHandler
 
                     }
             }
-        public void loadConfiguration()
+        private static void loadConfiguration()
             {
                 vanillaBonus = configuration.getBoolean("vanillaBonus", CATAGORY_MOREOPNESS,true,"If you feel that the 10% bonus is too OP in an already OP mod, disable it here.");
                 if(configuration.hasChanged())

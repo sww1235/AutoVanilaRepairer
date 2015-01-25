@@ -1,3 +1,5 @@
+import static sun.jvmstat.monitor.MonitoredVmUtil.jvmArgs
+ext.configFile = file "build.properties"
 buildscript {
     repositories {
         mavenCentral()
@@ -17,18 +19,33 @@ buildscript {
     }
 }
 
+
+
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+
+
+
 apply plugin: 'forge'
 
-version = "1.7.10-1.0"
+version = config.minecraft_version + "-" + config.forge_version
 group= "com.sww1235.AVR" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "AutoVanilaRepairer"
+archivesBaseName = "AutoVanilaRepairer(AVR)"
 
 minecraft {
 
     //to update, change forge version here and change version above as necessary.
-    version = "1.7.10-10.13.2.1291"
+    version = config.minecraft_version + "-" + config.forge_version
+    replaceIn "reference/Reference.java"
+    replace "@VERSION@","${config.mod_version}"
     runDir = "eclipse"
 }
+
+version = "${config.minecraft_version}-${config.mod_version}"
 
 dependencies {
     // you may put jars on which you depend on in ./libs
@@ -45,23 +62,25 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
 }
+processResources {
+    // exclude xcf files, as they are for development only
+    exclude '**/*.xcf'
 
-processResources
-{
-//    // this will ensure that this task is redone when the versions change.
-//    inputs.property "version", project.version
-//    inputs.property "mcversion", project.minecraft.version
-//
-//    // replace stuff in mcmod.info, nothing else
-//    from(sourceSets.main.resources.srcDirs) {
-//        include 'mcmod.info'
-//
-//        // replace version and mcversion
-//        expand 'version':project.version, 'mcversion':project.minecraft.version
-//    }
-//
-//    // copy everything else, thats not the mcmod.info
-//    from(sourceSets.main.resources.srcDirs) {
-//        exclude 'mcmod.info'
-    //}
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include '*.info'
+
+        // replace version and mcversion
+        expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
+    }
+
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.info'
+    }
+}
+
+
+runClient {
+    jvmArgs "-Xmx2048m", "-Xms2048m"
 }
