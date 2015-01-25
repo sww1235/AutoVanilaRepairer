@@ -12,6 +12,8 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+
+        //to update forgeGradle, change version above
     }
 }
 
@@ -22,7 +24,9 @@ group= "com.sww1235.AVR" // http://maven.apache.org/guides/mini/guide-naming-con
 archivesBaseName = "AutoVanilaRepairer"
 
 minecraft {
-    version = "1.7.10-10.13.2.1286"
+
+    //to update, change forge version here and change version above as necessary.
+    version = "1.7.10-10.13.2.1291"
     runDir = "eclipse"
 }
 
