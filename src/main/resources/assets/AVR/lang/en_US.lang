@@ -1,0 +1,3 @@
+item.AVR:basicItem.name=Test Item
+tile.AVR:basicBlock.name = Test Block
+itemGroup.AVR = Auto Vanilla Repair

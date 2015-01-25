@@ -1,8 +1,10 @@
 package com.sww1235.AVR;
 
+import com.sww1235.AVR.handler.ConfigurationHandler;
+import com.sww1235.AVR.init.ModBlocks;
+import com.sww1235.AVR.init.ModItems;
 import com.sww1235.AVR.proxy.IProxy;
 import com.sww1235.AVR.reference.Reference;
-import com.sww1235.AVR.handler.ConfigurationHandler;
 import com.sww1235.AVR.utility.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -26,11 +28,24 @@ public class AutoVanillaRepairer
             {
                 ConfigurationHandler.init(event.getSuggestedConfigurationFile());
                 FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+
+                //proxy.registerKeyBindings();
+
+                ModItems.init();
+
+
+                ModBlocks.init();
+
+
                 LogHelper.info("Pre Initialization Complete");
+
             }
         @Mod.EventHandler
         public void Init(FMLInitializationEvent event)
             {
+
+                //FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
+                //Recipes.init();
                 LogHelper.info("Initialization Complete");
             }
         @Mod.EventHandler
