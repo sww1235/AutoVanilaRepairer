@@ -3,6 +3,7 @@ package com.sww1235.AVR;
 import com.sww1235.AVR.handler.ConfigurationHandler;
 import com.sww1235.AVR.init.ModBlocks;
 import com.sww1235.AVR.init.ModItems;
+import com.sww1235.AVR.init.Recipes;
 import com.sww1235.AVR.proxy.IProxy;
 import com.sww1235.AVR.reference.Reference;
 import com.sww1235.AVR.utility.LogHelper;
@@ -45,7 +46,7 @@ public class AutoVanillaRepairer
             {
 
                 //FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
-                //Recipes.init();
+                Recipes.init();
                 LogHelper.info("Initialization Complete");
             }
         @Mod.EventHandler
